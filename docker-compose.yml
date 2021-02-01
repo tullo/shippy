@@ -1,0 +1,48 @@
+version: '3.5'
+
+services:
+  cli:
+    image: shippy-cli-consignment
+    build:
+      context: ./shippy-cli-consignment
+
+  consignment:
+    image: shippy-service-consignment
+    build:
+      context: ./shippy-service-consignment
+    depends_on:
+      datastore:
+        condition: service_started
+      vessel:
+        condition: service_started
+    environment:
+      DB_HOST: mongodb://datastore:27017
+      MICRO_SERVER_ADDRESS: :50051
+    ports:
+    - published: 50051
+      target: 50051
+    restart: always
+
+  datastore:
+    command: mongod --logpath=/dev/null
+    container_name: datastore
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /dev/null
+    image: mongo
+    ports:
+    - target: 27017
+    volumes:
+    - ./data/db:/data/db:rw
+
+  vessel:
+    image: shippy-service-vessel
+    build:
+      context: ./shippy-service-vessel
+    environment:
+      DB_HOST: mongodb://datastore:27017
+      MICRO_SERVER_ADDRESS: :50051
+    ports:
+    - published: 50052
+      target: 50051
+    restart: always
