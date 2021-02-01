@@ -7,22 +7,22 @@ import (
 
 	"github.com/micro/micro/v3/service"
 	"github.com/micro/micro/v3/service/logger"
-	pb "github.com/tullo/shippy/shippy-service-consignment/proto/consignment"
+	proto "github.com/tullo/shippy/shippy-service-consignment/proto"
 )
 
 type repository interface {
-	Create(*pb.Consignment) (*pb.Consignment, error)
-	GetAll() []*pb.Consignment
+	Create(*proto.Consignment) (*proto.Consignment, error)
+	GetAll() []*proto.Consignment
 }
 
 // Repository simulates the use of a datastore of some kind.
 type Repository struct {
 	mu           sync.RWMutex
-	consignments []*pb.Consignment
+	consignments []*proto.Consignment
 }
 
 // Create a new consignment.
-func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, error) {
+func (repo *Repository) Create(consignment *proto.Consignment) (*proto.Consignment, error) {
 	repo.mu.Lock()
 	updated := append(repo.consignments, consignment)
 	repo.consignments = updated
@@ -31,7 +31,7 @@ func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, er
 }
 
 // GetAll consignments.
-func (repo *Repository) GetAll() []*pb.Consignment {
+func (repo *Repository) GetAll() []*proto.Consignment {
 	return repo.consignments
 }
 
@@ -40,7 +40,7 @@ type consignmentService struct {
 }
 
 // CreateConsignment takes a context, consignment request and a response.
-func (s *consignmentService) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
+func (s *consignmentService) CreateConsignment(ctx context.Context, req *proto.Consignment, res *proto.Response) error {
 	consignment, err := s.repo.Create(req)
 	if err != nil {
 		return err
@@ -52,7 +52,7 @@ func (s *consignmentService) CreateConsignment(ctx context.Context, req *pb.Cons
 }
 
 // GetConsignments retrives all consignments from the datastore.
-func (s *consignmentService) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
+func (s *consignmentService) GetConsignments(ctx context.Context, req *proto.GetRequest, res *proto.Response) error {
 	consignments := s.repo.GetAll()
 	res.Consignments = consignments
 
@@ -68,7 +68,7 @@ func main() {
 	var repo Repository
 	var cs consignmentService
 	cs.repo = &repo
-	if err := pb.RegisterShippingServiceHandler(srv.Server(), &cs); err != nil {
+	if err := proto.RegisterShippingServiceHandler(srv.Server(), &cs); err != nil {
 		log.Panic(err)
 	}
 

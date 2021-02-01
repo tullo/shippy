@@ -8,7 +8,7 @@ docker-run:
 
 grcp:
 	@echo '~ protoc OK'
-	@protoc --proto_path=. --go_out=. --micro_out=. proto/consignment/consignment.proto
+	@protoc --proto_path=. --go_out=. --micro_out=. proto/consignment.proto
 
 micro-log:
 	@micro logs -f shippy-service-consignment
