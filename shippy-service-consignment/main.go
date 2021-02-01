@@ -3,17 +3,11 @@ package main
 import (
 	"context"
 	"log"
-	"net"
 	"sync"
 
-	// Import the generated protobuf code
+	"github.com/micro/micro/v3/service"
+	"github.com/micro/micro/v3/service/logger"
 	pb "github.com/tullo/shippy/shippy-service-consignment/proto/consignment"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
-)
-
-const (
-	port = ":50051"
 )
 
 type repository interface {
@@ -41,46 +35,45 @@ func (repo *Repository) GetAll() []*pb.Consignment {
 	return repo.consignments
 }
 
-type service struct {
+type consignmentService struct {
 	repo repository
 }
 
-// CreateConsignment takes a context and a consignment request.
-func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment) (*pb.Response, error) {
+// CreateConsignment takes a context, consignment request and a response.
+func (s *consignmentService) CreateConsignment(ctx context.Context, req *pb.Consignment, res *pb.Response) error {
 	consignment, err := s.repo.Create(req)
 	if err != nil {
-		return nil, err
+		return err
 	}
+	res.Created = true
+	res.Consignment = consignment
 
-	return &pb.Response{Created: true, Consignment: consignment}, nil
+	return nil
 }
 
 // GetConsignments retrives all consignments from the datastore.
-func (s *service) GetConsignments(context.Context, *pb.GetRequest) (*pb.Response, error) {
+func (s *consignmentService) GetConsignments(ctx context.Context, req *pb.GetRequest, res *pb.Response) error {
 	consignments := s.repo.GetAll()
+	res.Consignments = consignments
 
-	return &pb.Response{Consignments: consignments}, nil
+	return nil
 }
 
 func main() {
+	srv := service.New(
+		service.Name("shippy.service.consignment"),
+	)
+	srv.Init()
 
-	var svc = service{repo: &Repository{}}
-
-	// Set-up our gRPC server.
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+	var repo Repository
+	var cs consignmentService
+	cs.repo = &repo
+	if err := pb.RegisterShippingServiceHandler(srv.Server(), &cs); err != nil {
+		log.Panic(err)
 	}
-	s := grpc.NewServer()
 
-	// Register our service with the gRPC server.
-	pb.RegisterShippingServiceServer(s, &svc)
-
-	// Register reflection service on gRPC server.
-	reflection.Register(s)
-
-	log.Println("Running on port:", port)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+	// Run the service
+	if err := srv.Run(); err != nil {
+		logger.Fatal(err)
 	}
 }

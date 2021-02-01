@@ -8,8 +8,29 @@ docker-run:
 
 grcp:
 	@echo '~ protoc OK'
-	@protoc -I. --go_out=plugins=grpc:. proto/consignment/consignment.proto
+	@protoc --proto_path=. --go_out=. --micro_out=. proto/consignment/consignment.proto
 
 protoc-gen-go:
 	@cd && GO111MODULE=on go get github.com/golang/protobuf/protoc-gen-go@v1.4.3
 	@echo "OK"
+
+protoc-gen-micro:
+	@cd && GO111MODULE=on go get -v github.com/micro/micro/v3/cmd/protoc-gen-micro@master
+	@echo "OK"
+
+micro-log:
+	@micro logs -f shippy-service-consignment
+
+micro-kill:
+	@micro kill shippy-service-consignment
+	@micro status
+
+micro-run:
+	@micro run .
+
+micro-update:
+	@micro update .
+	@micro logs -f shippy-service-consignment
+
+micro-status:
+	@micro status

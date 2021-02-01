@@ -1,51 +1,44 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
-	"log"
-	"os"
-
 	"context"
+	"encoding/json"
+	"log"
 
+	"github.com/micro/micro/v3/service"
 	pb "github.com/tullo/shippy/shippy-service-consignment/proto/consignment"
-	"google.golang.org/grpc"
 )
 
-const (
-	address         = "localhost:50051"
-	defaultFilename = "consignment.json"
-)
+const address = "localhost:50051"
 
-func parseFile(file string) (*pb.Consignment, error) {
+var payload = `{
+	"description": "This is a test consignment",
+	"weight": 55000,
+	"containers": [
+	  { "customer_id": "cust001", "user_id": "user001", "origin": "Manchester, United Kingdom" },
+	  { "customer_id": "cust002", "user_id": "user001", "origin": "Derby, United Kingdom" },
+	  { "customer_id": "cust005", "user_id": "user001", "origin": "Sheffield, United Kingdom" }
+	]
+  }  
+`
+
+func parsePayload() (*pb.Consignment, error) {
 	var consignment *pb.Consignment
-	data, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, err
-	}
-	json.Unmarshal(data, &consignment)
+	err := json.Unmarshal([]byte(payload), &consignment)
 	return consignment, err
 }
 
 func main() {
-	// Set up a connection to the server.
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("Did not connect: %v", err)
-	}
-	defer conn.Close()
-	client := pb.NewShippingServiceClient(conn)
+	// create and initialise a new service
+	srv := service.New()
+	srv.Init()
+
+	client := pb.NewShippingService("shippy.service.consignment", srv.Client())
 
 	// Contact the server and print out its response.
-	file := defaultFilename
-	if len(os.Args) > 1 {
-		file = os.Args[1]
-	}
-
-	consignment, err := parseFile(file)
-
+	consignment, err := parsePayload()
 	if err != nil {
-		log.Fatalf("Could not parse file: %v", err)
+		log.Fatalf("Could not parse payload: %v", err)
 	}
 
 	r, err := client.CreateConsignment(context.Background(), consignment)
