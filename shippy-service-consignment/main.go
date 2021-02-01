@@ -18,6 +18,7 @@ const (
 
 type repository interface {
 	Create(*pb.Consignment) (*pb.Consignment, error)
+	GetAll() []*pb.Consignment
 }
 
 // Repository simulates the use of a datastore of some kind.
@@ -35,6 +36,11 @@ func (repo *Repository) Create(consignment *pb.Consignment) (*pb.Consignment, er
 	return consignment, nil
 }
 
+// GetAll consignments.
+func (repo *Repository) GetAll() []*pb.Consignment {
+	return repo.consignments
+}
+
 type service struct {
 	repo repository
 }
@@ -47,6 +53,13 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment) (*
 	}
 
 	return &pb.Response{Created: true, Consignment: consignment}, nil
+}
+
+// GetConsignments retrives all consignments from the datastore.
+func (s *service) GetConsignments(context.Context, *pb.GetRequest) (*pb.Response, error) {
+	consignments := s.repo.GetAll()
+
+	return &pb.Response{Consignments: consignments}, nil
 }
 
 func main() {
