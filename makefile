@@ -2,7 +2,10 @@ SHELL = /bin/bash -o pipefail
 
 .DEFAULT_GOAL := micro-server
 
-micro-server:
+datastore-up:
+	docker-compose up -d datastore
+
+micro-server: datastore-up
 	@micro server
 
 micro-login: micro-server
