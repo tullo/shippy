@@ -32,3 +32,18 @@ tidy:
 
 vendor: tidy
 	go mod vendor
+
+# =========================================================================== #
+# ================= CONSIGNMENT OPS ========================================= #
+# =========================================================================== #
+
+micro-help:
+	@micro shippy.service.consignment --help
+
+micro-consignment-create:
+	@micro shippy.service.consignment shippingService createConsignment \
+	--description 'CONSIGNMENT' --weight 33333 --vessel_id "123456789"
+
+micro-consignment-getAll:
+	@micro shippy.service.consignment shippingService getConsignments
+
