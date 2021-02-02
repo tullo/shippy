@@ -10,6 +10,10 @@ grcp:
 	@echo '~ protoc OK'
 	@protoc --proto_path=. --go_out=. --micro_out=. proto/consignment.proto
 
+micro-conf: export IP=$(shell docker container inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' datastore)
+micro-conf:
+	micro config set db.host 'mongodb://${IP}:27017'
+
 micro-log:
 	@micro logs -f shippy-service-consignment
 
@@ -26,3 +30,9 @@ micro-update:
 
 micro-status:
 	@micro status
+
+tidy:
+	go mod tidy
+
+vendor: tidy
+	go mod vendor
