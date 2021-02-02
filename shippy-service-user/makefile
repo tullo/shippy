@@ -45,9 +45,8 @@ micro-help:
 	@micro shippy.service.user --help
 
 micro-user-create:
-	@curl -H "Content-Type:application/json" \
-	-d '{"name": "Foo Bar","company": "Baz","email": "foo.bar@baz.com","password" : "s3cr3t"}' \
-	http://localhost:8080/shippy.service.user/userService/create
+	@micro shippy.service.user userService create \
+	--name 'John Doe' --company "CPH Shippers" --email "john.doe@cph.com" --password "s3cr3t"
 
 micro-user-getAll:
 	@micro shippy.service.user userService getAll
@@ -55,3 +54,7 @@ micro-user-getAll:
 micro-user-get:
 	@micro shippy.service.user userService get --id 54ecf63d-fc45-44d8-9a0d-6039ab3fd5fa
 
+curl-user-create:
+	@curl -H "Content-Type:application/json" \
+	-d '{"name": "Foo Bar","company": "Baz","email": "foo.bar@baz.com","password" : "s3cr3t"}' \
+	http://localhost:8080/shippy.service.user/userService/create
