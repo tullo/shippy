@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/micro/micro/v3/service"
-	pb "github.com/tullo/shippy/shippy-service-consignment/proto/consignment"
+	proto "github.com/tullo/shippy/shippy-service-consignment/proto"
 )
 
 const address = "localhost:50051"
@@ -22,8 +22,8 @@ var payload = `{
   }  
 `
 
-func parsePayload() (*pb.Consignment, error) {
-	var consignment *pb.Consignment
+func parsePayload() (*proto.Consignment, error) {
+	var consignment *proto.Consignment
 	err := json.Unmarshal([]byte(payload), &consignment)
 	return consignment, err
 }
@@ -33,7 +33,7 @@ func main() {
 	srv := service.New()
 	srv.Init()
 
-	client := pb.NewShippingService("shippy.service.consignment", srv.Client())
+	client := proto.NewShippingService("shippy.service.consignment", srv.Client())
 
 	// Contact the server and print out its response.
 	consignment, err := parsePayload()
@@ -47,7 +47,7 @@ func main() {
 	}
 	log.Printf("Created: %t", r.Created)
 
-	var get pb.GetRequest
+	var get proto.GetRequest
 	getAll, err := client.GetConsignments(context.Background(), &get)
 	if err != nil {
 		log.Fatalf("Could not list consignments: %v", err)
