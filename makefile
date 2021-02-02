@@ -5,6 +5,10 @@ SHELL = /bin/bash -o pipefail
 datastore-up:
 	docker-compose up -d datastore
 
+micro-conf: export IP=$(shell docker container inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' datastore)
+micro-conf:
+	micro config set db.host 'mongodb://${IP}:27017'
+
 micro-server: datastore-up
 	@micro server
 
