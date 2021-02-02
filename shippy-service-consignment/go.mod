@@ -2,6 +2,8 @@ module github.com/tullo/shippy/shippy-service-consignment
 
 go 1.15
 
+replace github.com/tullo/shippy/shippy-service-vessel => ../shippy-service-vessel
+
 require (
 	github.com/golang/protobuf v1.4.3
 	github.com/micro/micro/v3 v3.0.4
