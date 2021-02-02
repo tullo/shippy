@@ -28,3 +28,26 @@ micro-update:
 
 micro-status:
 	@micro status
+
+tidy:
+	@go mod tidy
+
+# =========================================================================== #
+# ================= VESSEL OPS ============================================== #
+# =========================================================================== #
+
+micro-help:
+	@micro shippy.service.vessel --help
+
+micro-vessel-create:
+	@micro shippy.service.vessel vesselService create \
+	--name 'vessel01' --capacity 300 --max_weight 500 --available true
+
+micro-vessel-findAvailable:
+	@micro shippy.service.vessel vesselService \
+		findAvailable --capacity 555 --max_weight 1000
+
+curl-vessel-create:
+	@curl -H "Content-Type:application/json" \
+	-d '{"name": "Vessel CPH", "capacity": 555, "max_weight": 888, "available" : true}' \
+	http://localhost:8080/shippy.service.vessel/vesselService/create
