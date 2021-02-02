@@ -6,6 +6,10 @@ services:
     build:
       context: ./shippy-cli-consignment
 
+  user-cli:
+    image: shippy-cli-user
+    build: ./shippy-cli-user
+
   consignment:
     image: shippy-service-consignment
     build:
@@ -23,6 +27,16 @@ services:
       target: 50051
     restart: always
 
+  database:
+    container_name: database
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: admin
+    image: postgres:alpine
+    ports:
+    - published: 5432
+      target: 5432
+
   datastore:
     command: mongod --logpath=/dev/null
     container_name: datastore
@@ -34,6 +48,20 @@ services:
     - target: 27017
     volumes:
     - ./data/db:/data/db:rw
+
+  user:
+    image: shippy-service-user
+    build: ./shippy-service-user
+    environment:
+      DB_HOST: database
+      DB_NAME: postgres
+      DB_PASSWORD: password
+      DB_USER: admin
+      MICRO_SERVER_ADDRESS: :50051
+    ports:
+    - published: 50053
+      target: 50051
+    restart: always
 
   vessel:
     image: shippy-service-vessel
