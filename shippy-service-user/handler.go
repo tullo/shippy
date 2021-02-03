@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"errors"
+	"log"
 
-	"github.com/micro/micro/v3/service"
+	"github.com/micro/micro/v3/service/events"
 	"github.com/micro/micro/v3/service/logger"
 	proto "github.com/tullo/shippy/shippy-service-user/proto"
 	"golang.org/x/crypto/bcrypt"
@@ -18,7 +19,6 @@ type authable interface {
 type handler struct {
 	repository   Repository
 	tokenService authable
-	publischer   *service.Event
 }
 
 func (s *handler) Get(ctx context.Context, req *proto.User, res *proto.Response) error {
@@ -102,8 +102,8 @@ func (s *handler) ValidateToken(ctx context.Context, req *proto.Token, res *prot
 
 func (s *handler) publishEvent(user *proto.User) error {
 	user.Password = ""
-	if err := s.publischer.Publish(context.TODO(), user); err != nil {
-		logger.Errorf("[pub] failed: %v", err)
+	if err := events.Publish(topic, user); err != nil {
+		log.Printf("[pub] failed: %v", err)
 	}
 	logger.Infof("[pub] %v", user)
 

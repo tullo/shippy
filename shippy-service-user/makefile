@@ -66,3 +66,6 @@ curl-user-create:
 micro-user-validateToken:
 	@micro shippy.service.user userService validateToken \
 	--token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiM2I4NWNjM2UtOGVkZS00ZDk2LTliZjYtNTQwYjE1ZGJlNjdhIiwiZW1haWwiOiJqb2huLmRvZUBjcGguY29tIiwicGFzc3dvcmQiOiJzM2NyM3QifSwiZXhwIjoxNjEyMzYyMjUwLCJpYXQiOjE2MTIzNTg2NTAsImlzcyI6InNoaXBweS5zZXJ2aWNlLnVzZXIifQ.sSwmfZXx0E-MEcOgSSvI_EVBGUly1ENagtpLYSCa4HQ"
+
+micro-events
+	micro store list

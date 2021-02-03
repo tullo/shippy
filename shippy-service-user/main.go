@@ -47,7 +47,6 @@ func main() {
 	h := handler{
 		repository:   repo,
 		tokenService: &TokenService{repo},
-		publischer:   service.NewEvent(topic),
 	}
 
 	// Register handler
