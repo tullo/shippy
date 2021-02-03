@@ -9,8 +9,8 @@ require (
 	github.com/golang/protobuf v1.4.3
 	github.com/micro/micro/v3 v3.0.4
 	github.com/pkg/errors v0.9.1
-	github.com/tullo/shippy/shippy-service-user v0.0.0-20210202235746-d4c5b64169aa
-	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20210202235746-d4c5b64169aa
+	github.com/tullo/shippy/shippy-service-user v0.0.0-20210203141101-b2aa444aca5c
+	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20210203141101-b2aa444aca5c
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	go.mongodb.org/mongo-driver v1.4.6
 	google.golang.org/genproto v0.0.0-20210202153253-cf70463f6119 // indirect

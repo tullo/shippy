@@ -6,5 +6,5 @@ go 1.15
 
 require (
 	github.com/micro/micro/v3 v3.0.4
-	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20210202235746-d4c5b64169aa
+	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20210203141101-b2aa444aca5c
 )
