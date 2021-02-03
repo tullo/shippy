@@ -19,6 +19,8 @@ micro-conf:
 	micro config set pg.user 'admin'
 	micro config set pg.password 'password'
 	micro config get pg
+	micro config set disable_auth 'true'
+	micro config get disable_auth
 
 micro-server: datastore-up
 	@micro server

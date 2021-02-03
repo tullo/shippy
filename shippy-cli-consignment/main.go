@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/micro/micro/v3/service"
+	"github.com/micro/micro/v3/service/context/metadata"
 	proto "github.com/tullo/shippy/shippy-service-consignment/proto"
 )
 
@@ -41,14 +42,19 @@ func main() {
 		log.Fatalf("Could not parse payload: %v", err)
 	}
 
-	r, err := client.CreateConsignment(context.Background(), consignment)
+	// Create a new context which contains our given token.
+	ctx := metadata.NewContext(context.Background(), map[string]string{
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiM2I4NWNjM2UtOGVkZS00ZDk2LTliZjYtNTQwYjE1ZGJlNjdhIiwiZW1haWwiOiJqb2huLmRvZUBjcGguY29tIiwicGFzc3dvcmQiOiJzM2NyM3QifSwiZXhwIjoxNjEyMzYyMjUwLCJpYXQiOjE2MTIzNTg2NTAsImlzcyI6InNoaXBweS5zZXJ2aWNlLnVzZXIifQ.sSwmfZXx0E-MEcOgSSvI_EVBGUly1ENagtpLYSCa4HQ",
+	})
+
+	r, err := client.CreateConsignment(ctx, consignment)
 	if err != nil {
 		log.Fatalf("Could not greet: %v", err)
 	}
 	log.Printf("Created: %t", r.Created)
 
 	var get proto.GetRequest
-	getAll, err := client.GetConsignments(context.Background(), &get)
+	getAll, err := client.GetConsignments(ctx, &get)
 	if err != nil {
 		log.Fatalf("Could not list consignments: %v", err)
 	}

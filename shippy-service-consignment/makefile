@@ -47,3 +47,6 @@ micro-consignment-create:
 micro-consignment-getAll:
 	@micro shippy.service.consignment shippingService getConsignments
 
+go-mod-edit:
+	go mod edit -replace github.com/tullo/shippy/shippy-service-user=../shippy-service-user
+	go mod edit -replace github.com/tullo/shippy/shippy-service-vessel=../shippy-service-vessel

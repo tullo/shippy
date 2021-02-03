@@ -3,7 +3,7 @@ module github.com/tullo/shippy/shippy-service-user
 go 1.15
 
 require (
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/golang/protobuf v1.4.3
 	github.com/jmoiron/sqlx v1.3.1
 	github.com/lib/pq v1.9.0

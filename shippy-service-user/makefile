@@ -55,9 +55,14 @@ micro-user-get:
 	@micro shippy.service.user userService get --id 54ecf63d-fc45-44d8-9a0d-6039ab3fd5fa
 
 micro-user-auth:
-	@micro shippy.service.user userService auth --email "john.doe@cph.com" --password "s3cr3t"
+	@micro shippy.service.user userService auth \
+	--email 'john.doe@cph.com' --password 's3cr3t' --id '3b85cc3e-8ede-4d96-9bf6-540b15dbe67a'
 
 curl-user-create:
 	@curl -H "Content-Type:application/json" \
 	-d '{"name": "Foo Bar","company": "Baz","email": "foo.bar@baz.com","password" : "s3cr3t"}' \
 	http://localhost:8080/shippy.service.user/userService/create
+
+micro-user-validateToken:
+	@micro shippy.service.user userService validateToken \
+	--token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiM2I4NWNjM2UtOGVkZS00ZDk2LTliZjYtNTQwYjE1ZGJlNjdhIiwiZW1haWwiOiJqb2huLmRvZUBjcGguY29tIiwicGFzc3dvcmQiOiJzM2NyM3QifSwiZXhwIjoxNjEyMzYyMjUwLCJpYXQiOjE2MTIzNTg2NTAsImlzcyI6InNoaXBweS5zZXJ2aWNlLnVzZXIifQ.sSwmfZXx0E-MEcOgSSvI_EVBGUly1ENagtpLYSCa4HQ"

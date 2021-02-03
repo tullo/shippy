@@ -312,9 +312,8 @@ github.com/tcnksm/go-gitconfig v0.1.2/go.mod h1:/8EhP4H7oJZdIPyT+/UIsG87kTzrzM4U
 github.com/teris-io/shortid v0.0.0-20171029131806-771a37caa5cf/go.mod h1:M8agBzgqHIhgj7wEn9/0hJUZcrvt9VY+Ln+S1I5Mha0=
 github.com/timewasted/linode v0.0.0-20160829202747-37e84520dcf7/go.mod h1:imsgLplxEC/etjIhdr3dNzV3JeT27LbVu5pYWm0JCBY=
 github.com/transip/gotransip v0.0.0-20190812104329-6d8d9179b66f/go.mod h1:i0f4R4o2HM0m3DZYQWsj6/MEowD57VzoH0v3d7igeFY=
-github.com/tullo/shippy v0.0.0-20210202152541-8f1e05b2d9e0 h1:6kyiXG0l/j/plV+wzHabH9EhQFbQLW4pufSAyu7ZOrg=
-github.com/tullo/shippy/shippy-service-user v0.0.0-20210202152541-8f1e05b2d9e0 h1:4gExAIJ+6/Qq21CVQmjbXiThBDgZpsEOC4nJcicE/rw=
-github.com/tullo/shippy/shippy-service-user v0.0.0-20210202152541-8f1e05b2d9e0/go.mod h1:8xYvw3SVt3vOdnF0CH2++8h2G556AYLTEZWcfiUoNns=
+github.com/tullo/shippy/shippy-service-user v0.0.0-20210202235746-d4c5b64169aa h1:LHmElp+wdr+SMMghVLzyIQ6QKF2nNfbunjyWWK45TEU=
+github.com/tullo/shippy/shippy-service-user v0.0.0-20210202235746-d4c5b64169aa/go.mod h1:8xYvw3SVt3vOdnF0CH2++8h2G556AYLTEZWcfiUoNns=
 github.com/uber-go/atomic v1.3.2/go.mod h1:/Ct5t2lcmbJ4OSe/waGBoaVvVqtO0bmtfVNex1PFV8g=
 github.com/ulikunitz/xz v0.5.5 h1:pFrO0lVpTBXLpYw+pnLj6TbvHuyjXMfjGeCwSqCVwok=
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
