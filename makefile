@@ -19,6 +19,8 @@ micro-conf:
 	micro config set pg.user 'admin'
 	micro config set pg.password 'password'
 	micro config get pg
+
+micro-conf-auth-disable:
 	micro config set disable_auth 'true'
 	micro config get disable_auth
 
