@@ -5,6 +5,7 @@ import (
 	"errors"
 	"log"
 
+	"github.com/micro/micro/v3/service"
 	proto "github.com/tullo/shippy/shippy-service-user/proto"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -17,6 +18,7 @@ type authable interface {
 type handler struct {
 	repository   Repository
 	tokenService authable
+	publischer   *service.Event
 }
 
 func (s *handler) Get(ctx context.Context, req *proto.User, res *proto.Response) error {
@@ -63,7 +65,6 @@ func (s *handler) Auth(ctx context.Context, req *proto.User, res *proto.Token) e
 }
 
 func (s *handler) Create(ctx context.Context, req *proto.User, res *proto.Response) error {
-	log.Println("user:", req)
 	hashedPass, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
@@ -77,6 +78,10 @@ func (s *handler) Create(ctx context.Context, req *proto.User, res *proto.Respon
 	// Strip the password back out, so's we're not returning it
 	req.Password = ""
 	res.User = req
+
+	if err := s.publishEvent(req); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -92,5 +97,14 @@ func (s *handler) ValidateToken(ctx context.Context, req *proto.Token, res *prot
 	}
 
 	res.Valid = true
+	return nil
+}
+
+func (s *handler) publishEvent(user *proto.User) error {
+	user.Password = ""
+	if err := s.publischer.Publish(context.TODO(), user); err != nil {
+		log.Printf("[pub] failed: %v", err)
+	}
+
 	return nil
 }

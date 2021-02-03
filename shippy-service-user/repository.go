@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"log"
 
 	"github.com/jmoiron/sqlx"
 	uuid "github.com/satori/go.uuid"
@@ -89,7 +88,6 @@ func (r *PostgresRepository) Get(ctx context.Context, id string) (*User, error) 
 // Create a new user
 func (r *PostgresRepository) Create(ctx context.Context, user *User) error {
 	user.ID = uuid.NewV4().String()
-	log.Println(user)
 	query := "insert into users (id, name, email, company, password) values ($1, $2, $3, $4, $5)"
 	_, err := r.db.ExecContext(ctx, query, user.ID, user.Name, user.Email, user.Company, user.Password)
 	return err

@@ -8,7 +8,9 @@ import (
 	proto "github.com/tullo/shippy/shippy-service-user/proto"
 )
 
-const schema = `
+const (
+	topic  = "user.created"
+	schema = `
 	create table if not exists users (
 		id varchar(36) not null,
 		name varchar(125) not null,
@@ -18,6 +20,7 @@ const schema = `
 		primary key (id)
 	);
 `
+)
 
 func main() {
 	// Create a new service. Optionally include some options here.
@@ -41,9 +44,14 @@ func main() {
 	db.MustExec(schema)
 
 	repo := NewPostgresRepository(db)
-	tokenService := &TokenService{repo}
+	h := handler{
+		repository:   repo,
+		tokenService: &TokenService{repo},
+		publischer:   service.NewEvent(topic),
+	}
+
 	// Register handler
-	if err := proto.RegisterUserServiceHandler(srv.Server(), &handler{repo, tokenService}); err != nil {
+	if err := proto.RegisterUserServiceHandler(srv.Server(), &h); err != nil {
 		log.Panic(err)
 	}
 
