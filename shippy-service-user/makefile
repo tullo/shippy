@@ -46,7 +46,7 @@ micro-help:
 
 micro-user-create:
 	@micro shippy.service.user userService create \
-	--name 'John Doe' --company "CPH Shippers" --email "john.doe@cph.com" --password "s3cr3t"
+	--name 'John Doe' --company "CPH Shippers" --email 'john.doe@cph.com' --password 's3cr3t'
 
 micro-user-getAll:
 	@micro shippy.service.user userService getAll
@@ -67,5 +67,8 @@ micro-user-validateToken:
 	@micro shippy.service.user userService validateToken \
 	--token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiM2I4NWNjM2UtOGVkZS00ZDk2LTliZjYtNTQwYjE1ZGJlNjdhIiwiZW1haWwiOiJqb2huLmRvZUBjcGguY29tIiwicGFzc3dvcmQiOiJzM2NyM3QifSwiZXhwIjoxNjEyMzYyMjUwLCJpYXQiOjE2MTIzNTg2NTAsImlzcyI6InNoaXBweS5zZXJ2aWNlLnVzZXIifQ.sSwmfZXx0E-MEcOgSSvI_EVBGUly1ENagtpLYSCa4HQ"
 
-micro-events
+micro-store-list:
 	micro store list
+
+micro-store-read:
+	micro store read user.created/ffa39464-0cb0-4a3d-a69d-7fc2bd48a40b
