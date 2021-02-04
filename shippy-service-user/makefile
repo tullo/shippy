@@ -56,12 +56,10 @@ micro-user-get:
 
 micro-user-auth:
 	@micro shippy.service.user userService auth \
-	--email 'john.doe@cph.com' --password 's3cr3t' --id '3b85cc3e-8ede-4d96-9bf6-540b15dbe67a'
-
-curl-user-create:
-	@curl -H "Content-Type:application/json" \
-	-d '{"name": "Foo Bar","company": "Baz","email": "foo.bar@baz.com","password" : "s3cr3t"}' \
-	http://localhost:8080/shippy.service.user/userService/create
+	--email 'john.doe@cph.com' --password 's3cr3t'
+#	@micro shippy.service.user userService auth \
+	--email 'john.doe@cph.com' --password 's3cr3t' \
+	--id '3b85cc3e-8ede-4d96-9bf6-540b15dbe67a'
 
 micro-user-validateToken:
 	@micro shippy.service.user userService validateToken \
@@ -72,3 +70,13 @@ micro-store-list:
 
 micro-store-read:
 	micro store read user.created/ffa39464-0cb0-4a3d-a69d-7fc2bd48a40b
+
+curl-user-create:
+	@curl -H "Content-Type:application/json" \
+	-d '{"name": "Foo Bar","company": "Baz","email": "foo.bar@baz.com","password" : "s3cr3t"}' \
+	http://localhost:8080/shippy.service.user/userService/create
+
+curl-user-auth:
+	@curl -H "Content-Type:application/json" \
+	-d '{"email": "foo.bar@baz.com","password" : "s3cr3t"}' \
+	http://localhost:8080/shippy.service.user/userService/auth

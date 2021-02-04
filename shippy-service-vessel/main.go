@@ -23,7 +23,7 @@ func main() {
 
 	val, err := config.Get("db.host")
 	if err != nil {
-		logger.Fatalf("Error loading config: %v", err)
+		logger.Errorf("Error loading config: %v", err)
 	}
 	uri := val.String("")
 

@@ -46,7 +46,6 @@ func main() {
 
 	go func() {
 		if err := srv.Run(); err != nil {
-			logger.Fatal(err)
 			done <- err
 		}
 	}()

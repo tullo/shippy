@@ -1,0 +1,1 @@
+db.getCollection('vessels').find({$and: [{ capacity: { $lte: 300 }, maxweight: { $lte: 500}}]})

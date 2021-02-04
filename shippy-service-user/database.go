@@ -27,13 +27,13 @@ func NewConnection() (*sqlx.DB, error) {
 func conf(key string) string {
 	cf, err := config.Get(key)
 	if err != nil {
-		logger.Fatalf("Error loading config: %v", err)
+		logger.Errorf("Error loading config: %v", err)
 		return ""
 	}
 
 	val := cf.String("")
 	if len(val) == 0 {
-		logger.Fatalf("Missing require config: %v", key)
+		logger.Errorf("Missing required config: %v", key)
 		return ""
 	}
 
