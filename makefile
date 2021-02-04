@@ -37,3 +37,18 @@ protoc-gen-go:
 protoc-gen-micro:
 	@cd && GO111MODULE=on go get -v github.com/micro/micro/v3/cmd/protoc-gen-micro@master
 	@echo "OK"
+
+# =========================================================================== #
+# ================= SHIPPY UI =============================================== #
+# =========================================================================== #
+
+install-nvm:
+	wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+
+install-npx:
+	nvm install --lts
+
+shippy-ui:
+	npx create-react-app shippy-ui
+	cd shippy-ui; dotrun
+	git add shippy-ui/
