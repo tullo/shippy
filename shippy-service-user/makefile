@@ -54,16 +54,15 @@ micro-user-getAll:
 micro-user-get:
 	@micro shippy.service.user userService get --id 54ecf63d-fc45-44d8-9a0d-6039ab3fd5fa
 
+# id must be part of user claims for token validation.
 micro-user-auth:
 	@micro shippy.service.user userService auth \
-	--email 'john.doe@cph.com' --password 's3cr3t'
-#	@micro shippy.service.user userService auth \
 	--email 'john.doe@cph.com' --password 's3cr3t' \
-	--id '3b85cc3e-8ede-4d96-9bf6-540b15dbe67a'
+	--id '9585c6bb-ced6-4a19-b5f7-e186dea0e23b'
 
 micro-user-validateToken:
 	@micro shippy.service.user userService validateToken \
-	--token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiM2I4NWNjM2UtOGVkZS00ZDk2LTliZjYtNTQwYjE1ZGJlNjdhIiwiZW1haWwiOiJqb2huLmRvZUBjcGguY29tIiwicGFzc3dvcmQiOiJzM2NyM3QifSwiZXhwIjoxNjEyMzYyMjUwLCJpYXQiOjE2MTIzNTg2NTAsImlzcyI6InNoaXBweS5zZXJ2aWNlLnVzZXIifQ.sSwmfZXx0E-MEcOgSSvI_EVBGUly1ENagtpLYSCa4HQ"
+	--token "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyIjp7ImlkIjoiOTU4NWM2YmItY2VkNi00YTE5LWI1ZjctZTE4NmRlYTBlMjNiIiwiZW1haWwiOiJqb2huLmRvZUBjcGguY29tIiwicGFzc3dvcmQiOiJzM2NyM3QifSwiZXhwIjoxNjEyNDc5NzU0LCJpYXQiOjE2MTI0NzYxNTQsImlzcyI6InNoaXBweS5zZXJ2aWNlLnVzZXIifQ.H_S3zGsqz3xN5B6pkbmO3b6kY8VmbD1JZfSxbbAbi5w"
 
 micro-store-list:
 	micro store list
@@ -78,5 +77,5 @@ curl-user-create:
 
 curl-user-auth:
 	@curl -H "Content-Type:application/json" \
-	-d '{"email": "foo.bar@baz.com","password" : "s3cr3t"}' \
+	-d '{"email": "foo.bar@baz.com","password" : "s3cr3t", "id": "0e7a2ffa-8bc7-4a9c-a95b-580490e3eca2"}' \
 	http://localhost:8080/shippy.service.user/userService/auth
