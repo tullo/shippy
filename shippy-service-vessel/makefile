@@ -39,15 +39,24 @@ tidy:
 micro-help:
 	@micro shippy.service.vessel --help
 
+# InsertOne ...
 micro-vessel-create:
 	@micro shippy.service.vessel vesselService create \
-	--name 'vessel01' --capacity 300 --max_weight 500 --available true
+	--name 'vessel35' --capacity 300 --max_weight 500 --available true
 
+# FindOne ...
 micro-vessel-findAvailable:
 	@micro shippy.service.vessel vesselService \
-		findAvailable --capacity 555 --max_weight 1000
+		findAvailable --capacity 300 --max_weight 500
 
+# InsertOne ...
 curl-vessel-create:
 	@curl -H "Content-Type:application/json" \
 	-d '{"name": "Vessel CPH", "capacity": 555, "max_weight": 888, "available" : true}' \
 	http://localhost:8080/shippy.service.vessel/vesselService/create
+
+# FindOne ...
+curl-vessel-findAvailable:
+	@curl -H "Content-Type:application/json" \
+	-d '{"capacity": 300, "max_weight": 500}' \
+	http://localhost:8080/shippy.service.vessel/vesselService/findAvailable
