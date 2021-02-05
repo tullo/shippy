@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 
+	"github.com/micro/micro/v3/service/logger"
 	proto "github.com/tullo/shippy/shippy-service-vessel/proto"
 )
 
@@ -17,11 +18,13 @@ func (s *handler) FindAvailable(ctx context.Context, req *proto.Specification, r
 	// Find the next available vessel
 	vessel, err := s.repository.FindAvailable(ctx, MarshalSpecification(req))
 	if err != nil {
-		return err
+		logger.Error(err)
+		return nil
 	}
 
 	// Set the vessel as part of the response message type
 	res.Vessel = UnmarshalVessel(vessel)
+
 	return nil
 }
 

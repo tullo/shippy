@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 
+	"github.com/micro/micro/v3/service/logger"
 	proto "github.com/tullo/shippy/shippy-service-consignment/proto"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -27,75 +29,74 @@ type Container struct {
 type Containers []*Container
 
 // MarshalContainer ...
-func MarshalContainer(container *proto.Container) *Container {
+func MarshalContainer(c *proto.Container) *Container {
 	return &Container{
-		ID:         container.Id,
-		CustomerID: container.CustomerId,
-		UserID:     container.UserId,
+		ID:         c.Id,
+		CustomerID: c.CustomerId,
+		UserID:     c.UserId,
 	}
 }
 
 // UnmarshalContainer ...
-func UnmarshalContainer(container *Container) *proto.Container {
+func UnmarshalContainer(c *Container) *proto.Container {
 	return &proto.Container{
-		Id:         container.ID,
-		CustomerId: container.CustomerID,
-		UserId:     container.UserID,
+		Id:         c.ID,
+		CustomerId: c.CustomerID,
+		UserId:     c.UserID,
 	}
 }
 
 // MarshalConsignment an input consignment type to a consignment model
-func MarshalConsignment(consignment *proto.Consignment) *Consignment {
-	containers := MarshalContainerCollection(consignment.Containers)
+func MarshalConsignment(c *proto.Consignment) *Consignment {
 	return &Consignment{
-		ID:          consignment.Id,
-		Weight:      consignment.Weight,
-		Description: consignment.Description,
-		Containers:  containers,
-		VesselID:    consignment.VesselId,
+		ID:          c.Id,
+		Weight:      c.Weight,
+		Description: c.Description,
+		Containers:  MarshalContainerCollection(c.Containers),
+		VesselID:    c.VesselId,
 	}
 }
 
 // UnmarshalConsignment ...
-func UnmarshalConsignment(consignment *Consignment) *proto.Consignment {
+func UnmarshalConsignment(c *Consignment) *proto.Consignment {
 	return &proto.Consignment{
-		Id:          consignment.ID,
-		Weight:      consignment.Weight,
-		Description: consignment.Description,
-		Containers:  UnmarshalContainerCollection(consignment.Containers),
-		VesselId:    consignment.VesselID,
+		Id:          c.ID,
+		Weight:      c.Weight,
+		Description: c.Description,
+		Containers:  UnmarshalContainerCollection(c.Containers),
+		VesselId:    c.VesselID,
 	}
 }
 
 // MarshalContainerCollection ...
-func MarshalContainerCollection(containers []*proto.Container) []*Container {
+func MarshalContainerCollection(cs []*proto.Container) []*Container {
 	collection := make([]*Container, 0)
-	for _, container := range containers {
-		collection = append(collection, MarshalContainer(container))
+	for _, c := range cs {
+		collection = append(collection, MarshalContainer(c))
 	}
 	return collection
 }
 
 // UnmarshalContainerCollection ...
-func UnmarshalContainerCollection(containers []*Container) []*proto.Container {
-	collection := make([]*proto.Container, 0)
-	for _, container := range containers {
-		collection = append(collection, UnmarshalContainer(container))
+func UnmarshalContainerCollection(collection []*Container) []*proto.Container {
+	cs := make([]*proto.Container, 0)
+	for _, c := range collection {
+		cs = append(cs, UnmarshalContainer(c))
 	}
-	return collection
+	return cs
 }
 
 // UnmarshalConsignmentCollection ...
-func UnmarshalConsignmentCollection(consignments []*Consignment) []*proto.Consignment {
-	collection := make([]*proto.Consignment, 0)
-	for _, consignment := range consignments {
-		collection = append(collection, UnmarshalConsignment(consignment))
+func UnmarshalConsignmentCollection(collection []*Consignment) []*proto.Consignment {
+	cs := make([]*proto.Consignment, 0)
+	for _, c := range collection {
+		cs = append(cs, UnmarshalConsignment(c))
 	}
-	return collection
+	return cs
 }
 
 type repository interface {
-	Create(ctx context.Context, consignment *Consignment) error
+	Create(ctx context.Context, c *Consignment) error
 	GetAll(ctx context.Context) ([]*Consignment, error)
 }
 
@@ -105,21 +106,29 @@ type MongoRepository struct {
 }
 
 // Create a new consignment.
-func (repository *MongoRepository) Create(ctx context.Context, consignment *Consignment) error {
-	_, err := repository.collection.InsertOne(ctx, consignment)
+func (r *MongoRepository) Create(ctx context.Context, c *Consignment) error {
+	_, err := r.collection.InsertOne(ctx, c)
 	return err
 }
 
 // GetAll consignments.
-func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Consignment, error) {
-	cur, err := repository.collection.Find(ctx, nil, nil)
-	var consignments []*Consignment
-	for cur.Next(ctx) {
-		var consignment *Consignment
-		if err := cur.Decode(&consignment); err != nil {
-			return nil, err
-		}
-		consignments = append(consignments, consignment)
+func (r *MongoRepository) GetAll(ctx context.Context) ([]*Consignment, error) {
+	var cs []*Consignment
+	cur, err := r.collection.Find(ctx, bson.D{})
+	if err != nil {
+		return cs, err
 	}
-	return consignments, err
+	if cur == nil {
+		return cs, nil
+	}
+	for cur.Next(ctx) {
+		var c *Consignment
+		if err := cur.Decode(&c); err != nil {
+			return cs, err
+		}
+		cs = append(cs, c)
+	}
+	logger.Infof("found (%v) consignments", len(cs))
+
+	return cs, nil
 }

@@ -52,11 +52,11 @@ micro-vessel-findAvailable:
 # InsertOne ...
 curl-vessel-create:
 	@curl -H "Content-Type:application/json" \
-	-d '{"name": "Vessel CPH", "capacity": 555, "max_weight": 888, "available" : true}' \
+	-d '{"name": "Vessel CPH", "capacity": 3, "max_weight": 55000, "available" : true}' \
 	http://localhost:8080/shippy.service.vessel/vesselService/create
 
 # FindOne ...
 curl-vessel-findAvailable:
 	@curl -H "Content-Type:application/json" \
-	-d '{"capacity": 300, "max_weight": 500}' \
+	-d '{"capacity": 3, "max_weight": 55000}' \
 	http://localhost:8080/shippy.service.vessel/vesselService/findAvailable
