@@ -9,6 +9,11 @@ import (
 	vesselProto "github.com/tullo/shippy/shippy-service-vessel/proto"
 )
 
+var (
+	// ErrVesselNotFound is used when a specific Vessel is requested but does not exist.
+	ErrVesselNotFound = errors.New("vessel not found")
+)
+
 type handler struct {
 	r repository
 	v vesselProto.VesselService
@@ -22,23 +27,22 @@ func (h *handler) CreateConsignment(ctx context.Context, req *proto.Consignment,
 		Capacity:  int32(len(req.Containers)),
 	}
 	ves, err := h.v.FindAvailable(ctx, &spec)
-	if ves == nil {
-		return errors.New("error fetching vessel, returned nil")
-	}
-
 	if err != nil {
-		return err
+		return errors.New("error fetching vessel")
 	}
 
-	// We set the VesselId as the vessel we got back from our
-	// vessel service
+	if ves.Vessel == nil {
+		logger.Errorf("vessel not found: filter {%s}", spec.String())
+		return ErrVesselNotFound
+	}
+
+	// Update with VesselId we got back from vessel service.
 	req.VesselId = ves.Vessel.Id
 
-	// Save consignment
+	// Save consignment.
 	if err = h.r.Create(ctx, MarshalConsignment(req)); err != nil {
 		return err
 	}
-
 	res.Created = true
 	res.Consignment = req
 
