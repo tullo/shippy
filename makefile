@@ -52,5 +52,4 @@ install-npx:
 
 shippy-ui:
 	npx create-react-app shippy-ui
-	cd shippy-ui; dotrun
-	git add shippy-ui/
+	git add shippy-ui
