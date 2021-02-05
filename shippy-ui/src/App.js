@@ -52,8 +52,6 @@ class App extends React.Component {
           password: this.state.password,
           name: this.state.name,
         },
-        method: "Auth.Create",
-        service: "shippy.auth",
       }),
     })
       .then((res) => res.json())
@@ -74,12 +72,8 @@ class App extends React.Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        request: {
-          email: this.state.email,
-          password: this.state.password,
-        },
-        service: "shippy.auth",
-        method: "Auth.Auth",
+        email: this.state.email,
+        password: this.state.password,
       }),
     })
       .then((res) => res.json())

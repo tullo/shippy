@@ -6,7 +6,11 @@ class CreateConsignment extends React.Component {
     created: false,
     description: "",
     weight: 0,
-    containers: [],
+    containers: [
+      { "customer_id": "cust001", "user_id": "user001", "origin": "Manchester, United Kingdom" },
+      { "customer_id": "cust002", "user_id": "user001", "origin": "Derby, United Kingdom" },
+      { "customer_id": "cust005", "user_id": "user001", "origin": "Sheffield, United Kingdom" }
+    ],
     consignments: [],
   };
 
@@ -18,11 +22,7 @@ class CreateConsignment extends React.Component {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        service: "shippy.consignment",
-        method: "ConsignmentService.Get",
-        request: {},
-      }),
+      body: JSON.stringify({}),
     })
       .then((req) => req.json())
       .then((res) => {
@@ -33,6 +33,7 @@ class CreateConsignment extends React.Component {
   }
 
   create = () => {
+    const omitted = ["created", "consignments"]
     const consignment = this.state;
     const token = localStorage.getItem("token");
     fetch(`http://localhost:8080/shippy.service.consignment/shippingService/createConsignment`, {
@@ -41,11 +42,7 @@ class CreateConsignment extends React.Component {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        service: "shippy.consignment",
-        method: "ConsignmentService.Create",
-        request: _.omit(consignment, "created", "consignments"),
-      }),
+      body: JSON.stringify(_.omit(consignment, [...omitted])),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -117,8 +114,8 @@ class CreateConsignment extends React.Component {
             ))}
           </div>
         ) : (
-          false
-        )}
+            false
+          )}
       </div>
     );
   }
