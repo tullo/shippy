@@ -1,8 +1,6 @@
 import React from "react";
-import CreateConsignment from "./CreateConsignment";
-import "./App.css";
 
-class App extends React.Component {
+class Authenticate extends React.Component {
   state = {
     authenticated: false,
     email: "",
@@ -10,34 +8,30 @@ class App extends React.Component {
     err: "",
   };
 
-  setEmail = (e) => {
-    this.setState({
-      email: e.target.value,
-    });
-  };
-
-  setPassword = (e) => {
-    this.setState({
-      password: e.target.value,
-    });
-  };
-
-  setName = (e) => {
-    this.setState({
-      name: e.target.value,
-    });
-  };
-
-  renderAuthenticated = () => {
-    return <CreateConsignment token={this.state.token} />;
-  };
-
-  setToken = (token) => {
-    localStorage.setItem("token", token);
-  };
-
-  getToken = () => {
-    return localStorage.getItem("token");
+  login = () => {
+    fetch(`http://localhost:8080/shippy.service.user/userService/auth`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        request: {
+          email: this.state.email,
+          password: this.state.password,
+        },
+        service: "shippy.auth",
+        method: "Auth.Auth",
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        this.props.onAuth(res.token);
+        this.setState({
+          token: res.token,
+          authenticated: true,
+        });
+      })
+      .catch((err) => this.setState({ err, authenticated: false }));
   };
 
   signup = () => {
@@ -58,6 +52,7 @@ class App extends React.Component {
     })
       .then((res) => res.json())
       .then((res) => {
+        this.props.onAuth(res.token.token);
         this.setState({
           token: res.token.token,
           authenticated: true,
@@ -67,39 +62,27 @@ class App extends React.Component {
       .catch((err) => this.setState({ err, authenticated: false }));
   };
 
-  login = () => {
-    fetch(`http://localhost:8080/shippy.service.user/userService/auth`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        request: {
-          email: this.state.email,
-          password: this.state.password,
-        },
-        service: "shippy.auth",
-        method: "Auth.Auth",
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          token: res.token,
-          authenticated: true,
-        });
-      })
-      .catch((err) => this.setState({ err, authenticated: false }));
+  setEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    });
   };
 
-  isAuthenticated = () => {
-    return this.state.token || this.getToken() || false;
+  setPassword = (e) => {
+    this.setState({
+      password: e.target.value,
+    });
   };
 
-  renderLogin = () => {
+  setName = (e) => {
+    this.setState({
+      name: e.target.value,
+    });
+  };
+
+  render() {
     return (
-      <div className="App-intro container">
-        <br />
+      <div className="Authenticate">
         <div className="Login">
           <div className="form-group">
             <input
@@ -154,22 +137,7 @@ class App extends React.Component {
         </div>
       </div>
     );
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Shippy</h2>
-        </div>
-        <div>
-          {this.state.authenticated
-            ? this.renderAuthenticated()
-            : this.renderLogin()}
-        </div>
-      </div>
-    );
   }
 }
 
-export default App;
+export default Authenticate;
