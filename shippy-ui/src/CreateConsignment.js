@@ -14,7 +14,7 @@ class CreateConsignment extends React.Component {
     consignments: [],
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const token = localStorage.getItem("token");
     fetch(`http://localhost:8080/shippy.service.consignment/shippingService/getConsignments`, {
       method: "POST",
