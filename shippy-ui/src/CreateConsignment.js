@@ -1,5 +1,11 @@
 import React from "react";
 import _ from "lodash";
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormLabel from 'react-bootstrap/FormLabel';
+import Card from 'react-bootstrap/Card';
 
 class CreateConsignment extends React.Component {
   state = {
@@ -74,49 +80,44 @@ class CreateConsignment extends React.Component {
   render() {
     const { consignments } = this.state;
     return (
-      <div className="consignment-screen">
-        <div className="consignment-form container">
-          <br />
-          <div className="form-group">
-            <textarea
-              onChange={this.setDescription}
-              className="form-control"
-              placeholder="Description"
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <input
-              onChange={this.setWeight}
-              type="number"
-              placeholder="Weight"
-              className="form-control"
-            />
-          </div>
-          <div className="form-control">Add containers...</div>
-          <br />
-          <button onClick={this.create} className="btn btn-primary">
-            Create
-          </button>
-          <br />
-          <hr />
-        </div>
+      <Container className="Consignments">
+        <Container className="Consignment-form">
+          <FormGroup>
+            <FormLabel>Description</FormLabel>
+            <FormControl as="textarea" placeholder="This is a test consignment" rows={2}
+              onChange={this.setDescription}>
+            </FormControl>
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Weight</FormLabel>
+            <FormControl type="number" placeholder="55000"
+              onChange={this.setWeight} />
+          </FormGroup>
+          <FormGroup>
+            <FormLabel>Containers</FormLabel>
+            <FormControl type="text" placeholder="Add containers..." readOnly />
+          </FormGroup>
+          <Button onClick={this.create} className="btn btn-primary">Create</Button>
+        </Container>
         {consignments && consignments.length > 0 ? (
-          <div className="consignment-list">
+          <Container className="Consignment-list">
             <h2>Consignments</h2>
             {consignments.map((item) => (
-              <div key={Math.random().toString(36).substr(2, 9)}>
-                <p>Vessel id: {item.vessel_id}</p>
-                <p>Consignment id: {item.id}</p>
-                <p>Description: {item.description}</p>
-                <p>Weight: {item.weight}</p>
-                <hr />
-              </div>
+              <Card className="Consignment" key={Math.random().toString(36).substr(2, 9)}>
+                <Card.Body>
+                  <Card.Title>#{item.id}</Card.Title>
+                  <Card.Text>{item.description}</Card.Text>
+                  <p>Weight: {item.weight}</p>
+                  <p>Vessel id: {item.vessel_id}</p>
+                  <p>Consignment id: {item.id}</p>
+                </Card.Body>
+              </Card>
             ))}
-          </div>
+          </Container>
         ) : (
             false
           )}
-      </div>
+      </Container>
     );
   }
 }

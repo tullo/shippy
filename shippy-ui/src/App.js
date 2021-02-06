@@ -1,5 +1,11 @@
 import React from "react";
 import CreateConsignment from "./CreateConsignment";
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FormControl from 'react-bootstrap/FormControl';
+import FormGroup from 'react-bootstrap/FormGroup';
+import FormLabel from 'react-bootstrap/FormLabel';
 import "./App.css";
 
 class App extends React.Component {
@@ -92,76 +98,53 @@ class App extends React.Component {
 
   renderLogin = () => {
     return (
-      <div className="App-intro container">
-        <br />
-        <div className="Login">
-          <div className="form-group">
-            <input
-              type="email"
-              onChange={this.setEmail}
-              placeholder="E-Mail"
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              onChange={this.setPassword}
-              placeholder="Password"
-              className="form-control"
-            />
-          </div>
-          <button className="btn btn-primary" onClick={this.login}>
-            Login
-          </button>
-          <br />
-          <br />
-        </div>
-        <div className="Sign-up">
-          <div className="form-group">
-            <input
-              type="input"
-              onChange={this.setName}
-              placeholder="Name"
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              onChange={this.setEmail}
-              placeholder="E-Mail"
-              className="form-control"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              onChange={this.setPassword}
-              placeholder="Password"
-              className="form-control"
-            />
-          </div>
-          <button className="btn btn-primary" onClick={this.signup}>
-            Sign-up
-          </button>
-        </div>
-      </div>
+      <Container className="Login-Signup">
+        <Container className="Login">
+          <Form>
+            <FormGroup>
+              <FormLabel>Email</FormLabel>
+              <FormControl type="email" placeholder="inbox@company.com" onChange={this.setEmail} />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel>Password</FormLabel>
+              <FormControl type="password" placeholder="password" onChange={this.setPassword} />
+            </FormGroup>
+            <Button onClick={this.login}>Login</Button>
+          </Form>
+        </Container>
+        <Container className="Signup">
+          <Form>
+            <FormGroup>
+              <FormLabel>Name</FormLabel>
+              <FormControl type="text" placeholder="Name" onChange={this.setName} />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel>Email</FormLabel>
+              <FormControl type="email" placeholder="inbox@company.com" onChange={this.setEmail} />
+            </FormGroup>
+            <FormGroup>
+              <FormLabel>Password</FormLabel>
+              <FormControl type="password" placeholder="password" onChange={this.setPassword} />
+            </FormGroup>
+            <Button onClick={this.signup}>Login</Button>
+          </Form>
+        </Container>
+      </Container>
     );
   };
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
+      <Container className="App">
+        <Container className="App-header">
           <h2>Shippy</h2>
-        </div>
-        <div>
+        </Container>
+        <Container className="App-body">
           {this.state.authenticated
             ? this.renderAuthenticated()
             : this.renderLogin()}
-        </div>
-      </div>
+        </Container>
+      </Container>
     );
   }
 }

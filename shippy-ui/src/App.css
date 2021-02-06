@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .App-logo {
@@ -26,6 +27,46 @@
 .App-link {
   color: #61dafb;
 }
+
+.App.container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.App-body {
+  text-align: left;
+}
+
+.App-body.container {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.Login-Signup.container {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.Login, .Signup{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.Login .form-control, .Signup .form-control{
+	background-color: #282c341f;
+}
+
+.Consignments.container {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 
 @keyframes App-logo-spin {
   from {
