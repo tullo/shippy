@@ -51,5 +51,5 @@ install-npx:
 	nvm install --lts
 
 shippy-ui:
-	npx create-react-app shippy-ui
+	npx create-react-app shippy-ui --use-npm
 	git add shippy-ui
