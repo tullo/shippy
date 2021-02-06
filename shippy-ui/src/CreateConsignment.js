@@ -104,7 +104,7 @@ class CreateConsignment extends React.Component {
           <div className="consignment-list">
             <h2>Consignments</h2>
             {consignments.map((item) => (
-              <div>
+              <div key={Math.random().toString(36).substr(2, 9)}>
                 <p>Vessel id: {item.vessel_id}</p>
                 <p>Consignment id: {item.id}</p>
                 <p>Description: {item.description}</p>
