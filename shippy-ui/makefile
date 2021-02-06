@@ -1,7 +1,9 @@
-SHELL = /bin/bash -o pipefail
+SHELL=/bin/bash -euo pipefail
+
+.DEFAULT_GOAL := start
+
 # https://reactjs.org/
 # https://create-react-app.dev/docs/deployment/
-.DEFAULT_GOAL := start
 
 start:
 	npm start
@@ -13,5 +15,22 @@ build:
 test:
 	npm run test
 
+# which serve 
+# ~.nvm/versions/node/v14.15.4/bin/serve
 serve:
-	serve -s build
+	npx serve --listen tcp://:3000 --single build
+
+upgrade:
+	npm install react-scripts@latest
+
+certs: dotfile=.env
+certs:
+	@mkdir -p tls/localhost
+	$$(go env GOPATH)/bin/mkcert \
+		-cert-file ./tls/localhost/cert.pem \
+		-key-file ./tls/localhost/key.pem \
+		localhost 127.0.0.1 ::1
+	@echo "HTTPS=true" > ${dotfile}
+	@echo "SSL_CRT_FILE=tls/localhost/cert.pem" >> ${dotfile}
+	@echo "SSL_KEY_FILE=tls/localhost/key.pem" >> ${dotfile}
+	@echo "Created ${dotfile} file."
