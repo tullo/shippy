@@ -5,6 +5,7 @@ import (
 
 	"github.com/micro/micro/v3/service/logger"
 	"github.com/pkg/errors"
+	"github.com/rs/xid"
 	proto "github.com/tullo/shippy/shippy-service-consignment/proto"
 	vesselProto "github.com/tullo/shippy/shippy-service-vessel/proto"
 )
@@ -38,6 +39,8 @@ func (h *handler) CreateConsignment(ctx context.Context, req *proto.Consignment,
 
 	// Update with VesselId we got back from vessel service.
 	req.VesselId = ves.Vessel.Id
+	guid := xid.New()
+	req.Id = guid.String()
 
 	// Save consignment.
 	if err = h.r.Create(ctx, MarshalConsignment(req)); err != nil {
