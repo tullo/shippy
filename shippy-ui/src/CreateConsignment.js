@@ -6,6 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import FormGroup from 'react-bootstrap/FormGroup';
 import FormLabel from 'react-bootstrap/FormLabel';
 import Card from 'react-bootstrap/Card';
+import Table from 'react-bootstrap/Table';
 
 class CreateConsignment extends React.Component {
   state = {
@@ -101,15 +102,41 @@ class CreateConsignment extends React.Component {
         </Container>
         {consignments && consignments.length > 0 ? (
           <Container className="Consignment-list">
-            <h2>Consignments</h2>
+            <h4>Consignments</h4>
             {consignments.map((item) => (
-              <Card className="Consignment" key={Math.random().toString(36).substr(2, 9)}>
+              <Card className="mb-2"
+                style={{ backgroundColor: 'rgba(40, 44, 52, 0.07)', marginBottom: '.5rem' }}
+                text='black'
+                key={Math.random().toString(36).substr(2, 9)}
+              >
+                <Card.Header>Consignment {item.id}:{Math.random().toString(36).substr(2, 9)}</Card.Header>
                 <Card.Body>
-                  <Card.Title>#{item.id}</Card.Title>
                   <Card.Text>{item.description}</Card.Text>
                   <p>Weight: {item.weight}</p>
-                  <p>Vessel id: {item.vessel_id}</p>
-                  <p>Consignment id: {item.id}</p>
+                  <Card.Link href={'/shippy.service.vessel/vesselService/get?id=' + Math.random().toString(36).substr(2, 9)}>Vessel: {item.vessel_id}</Card.Link>
+                  {item.containers && item.containers.length > 0 ? (
+                    <Container className="Containers">
+                      <h5>Containers</h5>
+                      <Table striped bordered hover size="sm">
+                        <thead>
+                          <tr>
+                            <th>Customer</th>
+                            <th>User</th>
+                            <th>Origin</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {item.containers.map((item) => (
+                            <tr key={Math.random().toString(36).substr(2, 9)}>
+                              <td>{item.customer_id}</td>
+                              <td>{item.user_id}</td>
+                              <td>{item.origin}{Math.random().toString(36).substr(2, 9)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </Container>
+                  ) : (false)}
                 </Card.Body>
               </Card>
             ))}

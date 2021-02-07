@@ -51,22 +51,41 @@
   margin-right: 0;
 }
 
-.Login, .Signup{
+.Login,
+.Signup{
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-.Login .form-control, .Signup .form-control{
+.Login .form-control,
+.Signup .form-control{
 	background-color: #282c341f;
 }
 
-.Consignments.container {
+.Consignments.container,
+.Containers.container {
   padding-left: 0;
   padding-right: 0;
+  margin-top: 10px;
   margin-left: 0;
   margin-right: 0;
 }
 
+.Containers.container .table {
+  background-color: #0597ae14;;
+  margin-bottom: 0;
+}
+
+.Consignment-list.container{
+  margin-top: 10px;  
+}
+
+.Consignment-list.container,
+.Consignment-list.container .card-body {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  padding-bottom: .3rem;
+}
 
 @keyframes App-logo-spin {
   from {
