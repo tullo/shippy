@@ -113,7 +113,7 @@ class CreateConsignment extends React.Component {
                 <Card.Body>
                   <Card.Text>{item.description}</Card.Text>
                   <p>Weight: {item.weight}</p>
-                  <Card.Link href={'/shippy.service.vessel/vesselService/get?id=' + Math.random().toString(36).substr(2, 9)}>Vessel: {item.vessel_id}</Card.Link>
+                  <Card.Link href={'/shippy.service.vessel/vesselService/get?id=' + item.vessel_id}>Vessel: {item.vessel_id}</Card.Link>
                   {item.containers && item.containers.length > 0 ? (
                     <Container className="Containers">
                       <h5>Containers</h5>
