@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/micro/micro/v3/service"
 	"github.com/micro/micro/v3/service/events"
 	"github.com/micro/micro/v3/service/logger"
@@ -13,7 +15,7 @@ const topic = "user.created"
 func process() error {
 	evStream, err := events.Consume(topic)
 	if err != nil {
-		logger.Errorf("error streaming events: topic: %v. error: %v", topic, err)
+		logger.Errorf(fmt.Sprintf("error streaming events: topic: %v. error: %v", topic, err))
 		return err
 	}
 
@@ -25,12 +27,12 @@ func process() error {
 			// If an error occurs log it.
 			var u proto.User
 			if err := ev.Unmarshal(&u); err != nil {
-				logger.Errorf("error unmarshaling message. topic:%v. error:%v", topic, err)
+				logger.Errorf(fmt.Sprintf("error unmarshaling message. topic:%v. error:%v", topic, err))
 				return err
 			}
 
-			logger.Infof("Picked up a new message: ID:", ev.ID)
-			logger.Infof("Sending email to:", u.Name)
+			logger.Infof(fmt.Sprintf("Picked up a new message: ID:%s", ev.ID))
+			logger.Infof(fmt.Sprintf("Sending email to:%s", u.Name))
 		}
 	}
 }
@@ -52,7 +54,7 @@ func main() {
 
 	for i := 0; i < cap(done); i++ {
 		if err := <-done; err != nil {
-			logger.Errorf("error: %v", err)
+			logger.Errorf(fmt.Sprintf("error: %v", err))
 		}
 	}
 }
