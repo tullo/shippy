@@ -75,8 +75,13 @@ func (r *MongoRepository) FindAvailable(ctx context.Context, spec *Specification
 	logger.Infof("FindOne %+v", spec)
 
 	filter := bson.D{
-		{"capacity", bson.D{{"$lte", spec.Capacity}}},
-		{"maxweight", bson.D{{"$lte", spec.MaxWeight}}},
+		{
+			Key:   "capacity",
+			Value: bson.D{{Key: "$lte", Value: spec.Capacity}}},
+		{
+			Key:   "maxweight",
+			Value: bson.D{{Key: "$lte", Value: spec.MaxWeight}},
+		},
 	}
 
 	var v Vessel
