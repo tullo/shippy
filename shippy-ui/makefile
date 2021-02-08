@@ -34,3 +34,7 @@ certs:
 	@echo "SSL_CRT_FILE=tls/localhost/cert.pem" >> ${dotfile}
 	@echo "SSL_KEY_FILE=tls/localhost/key.pem" >> ${dotfile}
 	@echo "Created ${dotfile} file."
+
+# https://react-bootstrap.github.io/
+add-bootstrap:
+	npm install --save react-bootstrap bootstrap
