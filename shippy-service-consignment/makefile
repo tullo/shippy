@@ -28,10 +28,10 @@ micro-status:
 	@micro status
 
 tidy:
-	go mod tidy
+	@go mod tidy
 
 vendor: tidy
-	go mod vendor
+	@go mod vendor
 
 # =========================================================================== #
 # ================= CONSIGNMENT OPS ========================================= #
