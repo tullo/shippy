@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/micro/micro/v3/service/logger"
+	"github.com/pkg/errors"
 	proto "github.com/tullo/shippy/shippy-service-vessel/proto"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -72,7 +74,7 @@ type Vessel struct {
 // if capacity and max weight are below a vessels capacity and max weight,
 // then return that vessel.
 func (r *MongoRepository) FindAvailable(ctx context.Context, spec *Specification) (*Vessel, error) {
-	logger.Infof("FindOne %+v", spec)
+	logger.Infof(fmt.Sprintf("FindOne {capacity:%d, maxweight:%d}", spec.Capacity, spec.MaxWeight))
 
 	filter := bson.D{
 		{
@@ -86,8 +88,9 @@ func (r *MongoRepository) FindAvailable(ctx context.Context, spec *Specification
 
 	var v Vessel
 	if err := r.collection.FindOne(ctx, filter).Decode(&v); err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "finding and decoding vessel")
 	}
+	logger.Infof(fmt.Sprintf("Found %q, MaxWeight=%d", v.Name, v.MaxWeight))
 
 	return &v, nil
 }
@@ -96,5 +99,5 @@ func (r *MongoRepository) FindAvailable(ctx context.Context, spec *Specification
 func (r *MongoRepository) Create(ctx context.Context, vessel *Vessel) error {
 	_, err := r.collection.InsertOne(ctx, vessel)
 
-	return err
+	return errors.Wrap(err, "creating vessel")
 }

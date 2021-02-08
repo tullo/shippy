@@ -11,6 +11,7 @@ require (
 	github.com/klauspost/compress v1.11.7 // indirect
 	github.com/micro/micro/v3 v3.0.4
 	github.com/miekg/dns v1.1.38 // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/rhysd/go-github-selfupdate v1.2.3 // indirect
 	github.com/rs/xid v1.2.1
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
