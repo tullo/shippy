@@ -12,6 +12,7 @@ require (
 	github.com/lib/pq v1.9.0
 	github.com/micro/micro/v3 v3.0.4
 	github.com/miekg/dns v1.1.38 // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/rhysd/go-github-selfupdate v1.2.3 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/satori/go.uuid v1.2.0
