@@ -22,14 +22,14 @@ type handler struct {
 
 // CreateConsignment ...
 func (h *handler) CreateConsignment(ctx context.Context, req *proto.Consignment, res *proto.Response) error {
-	// Filter vessel by max weight and cap.
+	// Find vessel using max-weight and cap.
 	spec := vesselProto.Specification{
 		MaxWeight: req.Weight,
 		Capacity:  int32(len(req.Containers)),
 	}
 	ves, err := h.v.FindAvailable(ctx, &spec)
 	if err != nil {
-		return errors.New("error fetching vessel")
+		return errors.Wrap(err, "error finding available vessel")
 	}
 
 	if ves.Vessel == nil {
@@ -44,7 +44,7 @@ func (h *handler) CreateConsignment(ctx context.Context, req *proto.Consignment,
 
 	// Save consignment.
 	if err = h.r.Create(ctx, MarshalConsignment(req)); err != nil {
-		return err
+		return errors.Wrap(err, "creating consignment")
 	}
 	res.Created = true
 	res.Consignment = req
@@ -57,6 +57,7 @@ func (h *handler) GetConsignments(ctx context.Context, req *proto.GetRequest, re
 	c, err := h.r.GetAll(ctx)
 	if err != nil {
 		logger.Error(err.Error())
+		return errors.Wrap(err, "retrieving consignments")
 	}
 	res.Consignments = UnmarshalConsignmentCollection(c)
 
