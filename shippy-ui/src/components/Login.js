@@ -6,13 +6,18 @@ import Email from "./Email";
 import Password from "./Password";
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = props.onSubmit
+ }    
+
   render() {
     return (
       <Container className="Login">
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Email />
           <Password />
-          <Button onClick={this.login}>Login</Button>
+          <Button type="submit">Login</Button>
         </Form>
       </Container>
     );
