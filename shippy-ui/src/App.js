@@ -1,41 +1,51 @@
 import React from "react";
-import CreateConsignment from "./CreateConsignment";
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import FormGroup from 'react-bootstrap/FormGroup';
-import FormLabel from 'react-bootstrap/FormLabel';
+import Container from "react-bootstrap/Container";
 import "./App.css";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import CreateConsignment from "./components/CreateConsignment";
 
 class App extends React.Component {
-  state = {
-    authenticated: false,
-    email: "",
-    password: "",
-    err: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      err: "",
+      user: {
+        authenticated: false,
+        email: "",
+        password: "",
+      },
+    };
+    this.handleLogin = this.login.bind(this);
+    this.handleSignup = this.signup.bind(this);
+  }
 
   setEmail = (e) => {
-    this.setState({
-      email: e.target.value,
-    });
+    e.preventDefault();
+    const user = this.state.user;
+    user.email= e.target.value
+    this.setState({ user: user });
   };
 
   setPassword = (e) => {
-    this.setState({
-      password: e.target.value,
-    });
+    e.preventDefault();
+    const user = this.state.user;
+    user.password= e.target.value
+    this.setState({ user: user });
   };
 
   setName = (e) => {
-    this.setState({
-      name: e.target.value,
-    });
+    e.preventDefault();
+    console.log("setName"+e.target.value)
+    const user = this.state.user;
+    user.name= e.target.value
+    this.setState({ user: user });
   };
 
   renderAuthenticated = () => {
-    return <CreateConsignment token={this.state.token} />;
+    return (
+      <CreateConsignment token={this.state.token} />
+    );
   };
 
   setToken = (token) => {
@@ -46,7 +56,13 @@ class App extends React.Component {
     return localStorage.getItem("token");
   };
 
-  signup = () => {
+  signup = (e) => {
+    e.preventDefault();
+    const user = this.state.user;
+    user.authenticated = true;
+    console.log("signup",user)
+    this.setState({ user: user });
+    /*
     fetch(`http://localhost:8080/shippy.service.user/userService/create`, {
       method: "POST",
       headers: {
@@ -54,24 +70,30 @@ class App extends React.Component {
       },
       body: JSON.stringify({
         request: {
-          email: this.state.email,
-          password: this.state.password,
-          name: this.state.name,
+          email: user.email,
+          password: user.password,
+          name: user.name,
         },
       }),
     })
       .then((res) => res.json())
       .then((res) => {
-        this.setState({
-          token: res.token.token,
-          authenticated: true,
-        });
+        user.token = res.token.token;
+        user.authenticated = true;
+        this.setState({ user: user });
         localStorage.setItem("token", res.token.token);
       })
       .catch((err) => this.setState({ err, authenticated: false }));
+      */
   };
 
-  login = () => {
+  login = (e) => {
+    e.preventDefault();
+    const user = this.state.user;
+    user.authenticated = true;
+    console.log("login",user)
+    this.setState({ user: user });
+    /*
     fetch(`http://localhost:8080/shippy.service.user/userService/auth`, {
       method: "POST",
       headers: {
@@ -90,45 +112,31 @@ class App extends React.Component {
         });
       })
       .catch((err) => this.setState({ err, authenticated: false }));
+    */
   };
 
   isAuthenticated = () => {
-    return this.state.token || this.getToken() || false;
+    return (
+      this.state.user.authenticated ||
+      this.state.user.token ||
+      this.state.user.token ||
+      false
+    );
   };
 
   renderLogin = () => {
     return (
       <Container className="Login-Signup">
-        <Container className="Login">
-          <Form>
-            <FormGroup>
-              <FormLabel>Email</FormLabel>
-              <FormControl type="email" placeholder="inbox@company.com" onChange={this.setEmail} />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Password</FormLabel>
-              <FormControl type="password" placeholder="password" onChange={this.setPassword} />
-            </FormGroup>
-            <Button onClick={this.login}>Login</Button>
-          </Form>
-        </Container>
-        <Container className="Signup">
-          <Form>
-            <FormGroup>
-              <FormLabel>Name</FormLabel>
-              <FormControl type="text" placeholder="Name" onChange={this.setName} />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Email</FormLabel>
-              <FormControl type="email" placeholder="inbox@company.com" onChange={this.setEmail} />
-            </FormGroup>
-            <FormGroup>
-              <FormLabel>Password</FormLabel>
-              <FormControl type="password" placeholder="password" onChange={this.setPassword} />
-            </FormGroup>
-            <Button onClick={this.signup}>Login</Button>
-          </Form>
-        </Container>
+        <Login email={this.state.user.email} password={this.state.user.password}
+          onSubmit={this.handleLogin}
+          onChangeEmail={this.setEmail} 
+          onChangePassword={this.setPassword}/>
+        <Signup name={this.state.user.name} email={this.state.user.email} password={this.state.user.password}
+          onSubmit={this.handleSignup}
+          onChangeName={this.setName} 
+          onChangeEmail={this.setEmail} 
+          onChangePassword={this.setPassword}
+          />
       </Container>
     );
   };
@@ -140,7 +148,7 @@ class App extends React.Component {
           <h2>Shippy</h2>
         </Container>
         <Container className="App-body">
-          {this.state.authenticated
+          {this.isAuthenticated()
             ? this.renderAuthenticated()
             : this.renderLogin()}
         </Container>

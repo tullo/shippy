@@ -87,6 +87,11 @@
   padding-bottom: .3rem;
 }
 
+#customer-id, #user-id, #origin {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

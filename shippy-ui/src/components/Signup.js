@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -6,24 +5,17 @@ import Email from "./Email";
 import Name from "./Name";
 import Password from "./Password";
 
-class Signup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = props.onSubmit;
-  }
-
-  render() {
-    return (
-      <Container className="Signup">
-        <Form onSubmit={this.handleSubmit}>
-          <Name />
-          <Email />
-          <Password />
-          <Button type="submit">Signup</Button>
-        </Form>
-      </Container>
-    );
-  }
+function Signup(props) {
+  return (
+    <Container className="Signup">
+      <Form onSubmit={props.onSubmit}>
+        <Name name={props.name} onChange={props.onChangeName} />
+        <Email email={props.email} onChange={props.onChangeEmail} />
+        <Password password={props.password} onChange={props.onChangePassword} />
+        <Button type="submit">Signup</Button>
+      </Form>
+    </Container>
+  );
 }
 
 export default Signup;

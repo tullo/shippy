@@ -1,21 +1,16 @@
-import React from "react";
 import FormControl from "react-bootstrap/FormControl";
 import FormGroup from "react-bootstrap/FormGroup";
 import FormLabel from "react-bootstrap/FormLabel";
-
-class Email extends React.Component {
-  render() {
-    return (
-      <FormGroup>
-        <FormLabel>Email</FormLabel>
-        <FormControl
-          type="email"
-          placeholder="inbox@company.com"
-          onChange={this.setEmail}
-        />
-      </FormGroup>
-    );
-  }
+function Email(props) {
+  return (
+    <FormGroup>
+      <FormLabel htmlFor="email">Email</FormLabel>
+      <FormControl id="email" type="email" placeholder="inbox@company.com"
+        value={props.email}
+        onChange={props.onChange}
+      />
+    </FormGroup>
+  );
 }
 
 export default Email;
