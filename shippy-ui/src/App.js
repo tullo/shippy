@@ -1,9 +1,10 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import "./App.css";
+import CreateConsignment from "./components/CreateConsignment";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import CreateConsignment from "./components/CreateConsignment";
+import { loginUser, signupUser } from "./services/UserSerice.js";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends React.Component {
       err: "",
       user: {
         authenticated: false,
+        name: "",
         email: "",
         password: "",
       },
@@ -23,29 +25,26 @@ class App extends React.Component {
   setEmail = (e) => {
     e.preventDefault();
     const user = this.state.user;
-    user.email= e.target.value
+    user.email = e.target.value;
     this.setState({ user: user });
   };
 
   setPassword = (e) => {
     e.preventDefault();
     const user = this.state.user;
-    user.password= e.target.value
+    user.password = e.target.value;
     this.setState({ user: user });
   };
 
   setName = (e) => {
     e.preventDefault();
-    console.log("setName"+e.target.value)
     const user = this.state.user;
-    user.name= e.target.value
+    user.name = e.target.value;
     this.setState({ user: user });
   };
 
   renderAuthenticated = () => {
-    return (
-      <CreateConsignment token={this.state.token} />
-    );
+    return <CreateConsignment token={this.getToken()} />;
   };
 
   setToken = (token) => {
@@ -59,60 +58,41 @@ class App extends React.Component {
   signup = (e) => {
     e.preventDefault();
     const user = this.state.user;
-    user.authenticated = true;
-    console.log("signup",user)
-    this.setState({ user: user });
-    /*
-    fetch(`http://localhost:8080/shippy.service.user/userService/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        request: {
-          email: user.email,
-          password: user.password,
-          name: user.name,
-        },
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        user.token = res.token.token;
-        user.authenticated = true;
-        this.setState({ user: user });
-        localStorage.setItem("token", res.token.token);
-      })
-      .catch((err) => this.setState({ err, authenticated: false }));
-      */
+    let err = this.state.err;
+    signupUser(user).then((res) => {
+      if (res.user) {
+        err = ""
+        // TODO display login msg & logout button.
+      } else {
+        err = res.detail 
+        const msg = "signup failed for '" + user.email +
+          "', error code (" + res.code + ") '" + res.detail + "'";
+        console.error(msg);
+      }
+
+      this.setState({ err: err, user: user });
+    });
   };
 
   login = (e) => {
     e.preventDefault();
     const user = this.state.user;
-    user.authenticated = true;
-    console.log("login",user)
-    this.setState({ user: user });
-    /*
-    fetch(`http://localhost:8080/shippy.service.user/userService/auth`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        this.setState({
-          token: res.token,
-          authenticated: true,
-        });
-      })
-      .catch((err) => this.setState({ err, authenticated: false }));
-    */
+    let err = this.state.err;
+    loginUser(user).then((res) => {
+      if (res.token) {
+        user.authenticated = true;
+        user.token = res.token;
+        this.setToken(res.token);
+      } else {
+        user.authenticated = false;
+        err = res.detail 
+        const msg = "login failed for '" + user.email +
+          "', error code (" + res.code + ") '" + res.detail + "'";
+        console.error(msg);
+      }
+
+      this.setState({ err: err, user: user });
+    });
   };
 
   isAuthenticated = () => {
@@ -127,16 +107,22 @@ class App extends React.Component {
   renderLogin = () => {
     return (
       <Container className="Login-Signup">
-        <Login email={this.state.user.email} password={this.state.user.password}
-          onSubmit={this.handleLogin}
-          onChangeEmail={this.setEmail} 
-          onChangePassword={this.setPassword}/>
-        <Signup name={this.state.user.name} email={this.state.user.email} password={this.state.user.password}
-          onSubmit={this.handleSignup}
-          onChangeName={this.setName} 
-          onChangeEmail={this.setEmail} 
+        <Login
+          email={this.state.user.email}
+          password={this.state.user.password}
+          onChangeEmail={this.setEmail}
           onChangePassword={this.setPassword}
-          />
+          onSubmit={this.handleLogin}
+        />
+        <Signup
+          name={this.state.user.name}
+          email={this.state.user.email}
+          password={this.state.user.password}
+          onChangeName={this.setName}
+          onChangeEmail={this.setEmail}
+          onChangePassword={this.setPassword}
+          onSubmit={this.handleSignup}
+        />
       </Container>
     );
   };
