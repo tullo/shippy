@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { createConsignment, getConsignments } from "../services/ConsignmentService";
 import Consignments from "./Consignments";
 import ContainerForm from "./ContainerForm";
-import ContainerList from "./ContainerList";
+import ContainerTable from "./ContainerTable";
 import Description from "./Description";
 import Weight from "./Weight";
 
@@ -188,8 +188,7 @@ class CreateConsignment extends React.Component {
             value={this.state.consignment.weight}
             onChange={this.setWeight}
           />
-          <h5>Containers</h5>
-          {<ContainerList containers={this.state.containers} />}
+          <ContainerTable containers={this.state.containers} />
           <ContainerForm
             customerId={this.state.container.customer_id}
             origin={this.state.container.origin}
