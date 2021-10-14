@@ -11,6 +11,6 @@ require (
 	github.com/rs/xid v1.2.1
 	github.com/tullo/shippy/shippy-service-user v0.0.0-20210208131416-ea808df223ef
 	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20210208131416-ea808df223ef
-	go.mongodb.org/mongo-driver v1.4.6
+	go.mongodb.org/mongo-driver v1.5.1
 	google.golang.org/protobuf v1.25.0
 )
