@@ -491,6 +491,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1
 github.com/transip/gotransip/v6 v6.0.2/go.mod h1:pQZ36hWWRahCUXkFWlx9Hs711gLd8J4qdgLdRzmtY+g=
 github.com/tullo/shippy/shippy-service-user v0.0.0-20221220165820-183b4c282136 h1:NV57qXxCrvkadkSqlUnmjfPpqhBCD0mVfVRL8WdSSGo=
 github.com/tullo/shippy/shippy-service-user v0.0.0-20221220165820-183b4c282136/go.mod h1:EMxTeAVfe6N0e0wrUu4WSbFMV54QPjLyfvOH/APO5wE=
+github.com/tullo/shippy/shippy-service-user v0.0.0-20230120160514-b45b95e3de6c h1:bNYiXwjE3E2RuR3GvosGCip98VL1hmNCKZv2yysiIws=
+github.com/tullo/shippy/shippy-service-user v0.0.0-20230120160514-b45b95e3de6c/go.mod h1:kcGU2x6GtsfFolB66SzWh3VaZBz0hv4G9uus66O8K+Q=
 github.com/tullo/shippy/shippy-service-vessel v0.0.0-20221220165820-183b4c282136 h1:o0GsA4JXWwohtDEExkPWR6MoEwAOMgwYJsn7i96c7kc=
 github.com/tullo/shippy/shippy-service-vessel v0.0.0-20221220165820-183b4c282136/go.mod h1:OmsC+ufhMQKjoC7BoJd867Ra1XmZH+RK0jX4RH1kq8g=
 github.com/uber-go/atomic v1.3.2/go.mod h1:/Ct5t2lcmbJ4OSe/waGBoaVvVqtO0bmtfVNex1PFV8g=
