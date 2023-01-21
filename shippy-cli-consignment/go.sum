@@ -485,6 +485,8 @@ github.com/tullo/shippy/shippy-service-consignment v0.0.0-20221220165820-183b4c2
 github.com/tullo/shippy/shippy-service-consignment v0.0.0-20221220165820-183b4c282136/go.mod h1:dBdNSi3V++usTlEfU2ra1UrS+3rpn1bCPcZUqmKaF9o=
 github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230120160514-b45b95e3de6c h1:cgljXtDoLuEytCSwzFCL0dwprqpz5NLCKjaZ2qNibSs=
 github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230120160514-b45b95e3de6c/go.mod h1:78JUBJ65CotHyeRx0E0a4iDiXn6ghRlFN1yRQZ+QbWo=
+github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230121180852-061bf1a7abce h1:nhsfz6qDFLKkG+nKWdhfcAkBEW4RZ2x8cc0CbbwgyLM=
+github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230121180852-061bf1a7abce/go.mod h1:EFZexZR5mWQ+cCfS/x7CsEUBEGL1ESPZmPTTwxl/qig=
 github.com/uber-go/atomic v1.3.2/go.mod h1:/Ct5t2lcmbJ4OSe/waGBoaVvVqtO0bmtfVNex1PFV8g=
 github.com/uber/jaeger-client-go v2.30.0+incompatible h1:D6wyKGCecFaSRUpo8lCVbaOOb6ThwMmTEbhRwtKR97o=
 github.com/uber/jaeger-client-go v2.30.0+incompatible/go.mod h1:WVhlPFC8FDjOFMMWRy2pZqQJSXxYSwNYOkTr/Z6d3Kk=
