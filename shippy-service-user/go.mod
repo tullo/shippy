@@ -7,7 +7,7 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/jmoiron/sqlx v1.3.5
 	github.com/lib/pq v1.10.7
-	github.com/micro/micro/v3 v3.15.1
+	github.com/micro/micro/v3 v3.16.0
 	github.com/pkg/errors v0.9.1
 	github.com/satori/go.uuid v1.2.0
 	golang.org/x/crypto v0.5.0

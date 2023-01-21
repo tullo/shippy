@@ -5,7 +5,7 @@ go 1.19
 // replace github.com/tullo/shippy/shippy-service-consignment => ../shippy-service-consignment
 
 require (
-	github.com/micro/micro/v3 v3.15.1
+	github.com/micro/micro/v3 v3.16.0
 	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230120160514-b45b95e3de6c
 )
 
