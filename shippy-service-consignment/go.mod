@@ -9,7 +9,7 @@ require (
 	github.com/micro/micro/v3 v3.16.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.4.0
-	github.com/tullo/shippy/shippy-service-user v0.0.0-20230121215244-4184ef6595f6
+	github.com/tullo/shippy/shippy-service-user v0.0.0-20230218200410-3aa5b508bb81
 	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230120161508-d63c2b255fe7
 	go.mongodb.org/mongo-driver v1.11.2
 	google.golang.org/protobuf v1.28.1
@@ -52,7 +52,7 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	go.etcd.io/bbolt v1.3.6 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	golang.org/x/crypto v0.5.0 // indirect
+	golang.org/x/crypto v0.6.0 // indirect
 	golang.org/x/mod v0.7.0 // indirect
 	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
