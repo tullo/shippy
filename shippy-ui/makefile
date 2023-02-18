@@ -9,20 +9,25 @@ start:
 	npm start
 
 # homepage field in package.json
+.PHONY: build
 build:
 	npm run build
 
+.PHONY: test
 test:
 	npm run test
 
 # which serve 
 # ~.nvm/versions/node/v14.15.4/bin/serve
+.PHONY: serve
 serve:
 	npx serve --listen tcp://:3000 --single build
 
+.PHONY: upgrade
 upgrade:
 	npm install react-scripts@latest
 
+.PHONY: certs
 certs: dotfile=.env
 certs:
 	@mkdir -p tls/localhost
@@ -36,5 +41,6 @@ certs:
 	@echo "Created ${dotfile} file."
 
 # https://react-bootstrap.github.io/
+.PHONY: add-bootstrap
 add-bootstrap:
 	npm install --save react-bootstrap bootstrap
