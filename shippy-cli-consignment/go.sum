@@ -481,6 +481,8 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20170815181823-89b8d40f7ca8/go.mod h1
 github.com/transip/gotransip/v6 v6.0.2/go.mod h1:pQZ36hWWRahCUXkFWlx9Hs711gLd8J4qdgLdRzmtY+g=
 github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230121215244-4184ef6595f6 h1:vCcS2SDM/utdrAEAzJeNTQ54OZGqggQ7XlsrdyEkz3U=
 github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230121215244-4184ef6595f6/go.mod h1:2z+qRxMXDHRaFYnZ+kRrOe17A3JD9CWmGm/AvQrD1zk=
+github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230218200410-3aa5b508bb81 h1:lqqYSBR0pz8Fhx/gZEuEwLmaYL6Qq7JHOiSa3Y3mbHo=
+github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230218200410-3aa5b508bb81/go.mod h1:4s1F420Bgp2N9P90grbrBePHz/mtXCmHOrk/r7jH16o=
 github.com/uber-go/atomic v1.3.2/go.mod h1:/Ct5t2lcmbJ4OSe/waGBoaVvVqtO0bmtfVNex1PFV8g=
 github.com/uber/jaeger-client-go v2.30.0+incompatible h1:D6wyKGCecFaSRUpo8lCVbaOOb6ThwMmTEbhRwtKR97o=
 github.com/uber/jaeger-client-go v2.30.0+incompatible/go.mod h1:WVhlPFC8FDjOFMMWRy2pZqQJSXxYSwNYOkTr/Z6d3Kk=
