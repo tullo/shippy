@@ -6,7 +6,7 @@ go 1.19
 
 require (
 	github.com/micro/micro/v3 v3.16.0
-	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230218200410-3aa5b508bb81
+	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230221210322-aed927726754
 )
 
 require (
