@@ -3,7 +3,7 @@ module github.com/tullo/shippy/shippy-service-vessel
 go 1.19
 
 require (
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.3
 	github.com/micro/micro/v3 v3.16.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.4.0

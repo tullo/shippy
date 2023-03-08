@@ -5,7 +5,7 @@ go 1.19
 // replace github.com/tullo/shippy/shippy-service-vessel => ../shippy-service-vessel
 
 require (
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.3
 	github.com/micro/micro/v3 v3.16.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.4.0
