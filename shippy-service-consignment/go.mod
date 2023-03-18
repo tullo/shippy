@@ -9,7 +9,7 @@ require (
 	github.com/micro/micro/v3 v3.16.0
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.4.0
-	github.com/tullo/shippy/shippy-service-user v0.0.0-20230221210322-aed927726754
+	github.com/tullo/shippy/shippy-service-user v0.0.0-20230318131614-8bc73ce8f6ea
 	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230311154558-a2b1df2eb1d5
 	go.mongodb.org/mongo-driver v1.11.3
 	google.golang.org/protobuf v1.30.0
@@ -52,13 +52,13 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a // indirect
 	go.etcd.io/bbolt v1.3.6 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
-	golang.org/x/crypto v0.6.0 // indirect
-	golang.org/x/mod v0.7.0 // indirect
-	golang.org/x/net v0.7.0 // indirect
+	golang.org/x/crypto v0.7.0 // indirect
+	golang.org/x/mod v0.8.0 // indirect
+	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
-	golang.org/x/sys v0.5.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
-	golang.org/x/tools v0.5.0 // indirect
+	golang.org/x/sys v0.6.0 // indirect
+	golang.org/x/text v0.8.0 // indirect
+	golang.org/x/tools v0.6.0 // indirect
 	google.golang.org/genproto v0.0.0-20230106154932-a12b697841d9 // indirect
 	google.golang.org/grpc v1.51.0 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
