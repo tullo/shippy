@@ -493,6 +493,8 @@ github.com/tullo/shippy/shippy-service-user v0.0.0-20230221210322-aed927726754 h
 github.com/tullo/shippy/shippy-service-user v0.0.0-20230221210322-aed927726754/go.mod h1:sC8DHFE8OVwvGlxa9hkvlojEyz9cHfoyZxae1mJQWXk=
 github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230311154558-a2b1df2eb1d5 h1:55xkeWAHbwhceTheCCORbmophrdcuboRIQRDwJFZVWY=
 github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230311154558-a2b1df2eb1d5/go.mod h1:UGQwrJsOX/hgPJK/t2grOdLMpyQvI3C2zMe0jP9REOI=
+github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230318131614-8bc73ce8f6ea h1:KDoe1MtJWvU3go+y90HeYDlZf0EHiSOyeNefELzLsM4=
+github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230318131614-8bc73ce8f6ea/go.mod h1:psUSZnCZ49gjlyn4BZM722dUwjk9zAF71OrdPBkXnrg=
 github.com/uber-go/atomic v1.3.2/go.mod h1:/Ct5t2lcmbJ4OSe/waGBoaVvVqtO0bmtfVNex1PFV8g=
 github.com/uber/jaeger-client-go v2.30.0+incompatible h1:D6wyKGCecFaSRUpo8lCVbaOOb6ThwMmTEbhRwtKR97o=
 github.com/uber/jaeger-client-go v2.30.0+incompatible/go.mod h1:WVhlPFC8FDjOFMMWRy2pZqQJSXxYSwNYOkTr/Z6d3Kk=

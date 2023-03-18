@@ -10,7 +10,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rs/xid v1.4.0
 	github.com/tullo/shippy/shippy-service-user v0.0.0-20230221210322-aed927726754
-	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230311154558-a2b1df2eb1d5
+	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230318131614-8bc73ce8f6ea
 	go.mongodb.org/mongo-driver v1.11.3
 	google.golang.org/protobuf v1.30.0
 )
