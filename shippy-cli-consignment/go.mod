@@ -6,7 +6,7 @@ go 1.19
 
 require (
 	github.com/micro/micro/v3 v3.16.0
-	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230311154558-a2b1df2eb1d5
+	github.com/tullo/shippy/shippy-service-consignment v0.0.0-20230318131614-8bc73ce8f6ea
 )
 
 require (
@@ -51,7 +51,7 @@ require (
 	golang.org/x/tools v0.5.0 // indirect
 	google.golang.org/genproto v0.0.0-20230106154932-a12b697841d9 // indirect
 	google.golang.org/grpc v1.51.0 // indirect
-	google.golang.org/protobuf v1.29.1 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
