@@ -12,7 +12,7 @@ require (
 	github.com/tullo/shippy/shippy-service-user v0.0.0-20230221210322-aed927726754
 	github.com/tullo/shippy/shippy-service-vessel v0.0.0-20230311154558-a2b1df2eb1d5
 	go.mongodb.org/mongo-driver v1.11.3
-	google.golang.org/protobuf v1.29.1
+	google.golang.org/protobuf v1.30.0
 )
 
 require (
