@@ -1,3 +1,21 @@
 [submodule "shippy-service-email"]
 	path = shippy-service-email
 	url = https://github.com/tullo/shippy-service-email
+[submodule "shippy-service-user"]
+	path = shippy-service-user
+	url = https://github.com/tullo/shippy-service-user
+[submodule "shippy-service-vessel"]
+	path = shippy-service-vessel
+	url = https://github.com/tullo/shippy-service-vessel
+[submodule "shippy-service-consignment"]
+	path = shippy-service-consignment
+	url = https://github.com/tullo/shippy-service-consignment
+[submodule "shippy-cli-user"]
+	path = shippy-cli-user
+	url = https://github.com/tullo/shippy-cli-user
+[submodule "shippy-cli-consignment"]
+	path = shippy-cli-consignment
+	url = https://github.com/tullo/shippy-cli-consignment
+[submodule "shippy-ui"]
+	path = shippy-ui
+	url = https://github.com/tullo/shippy-ui
