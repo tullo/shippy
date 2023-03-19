@@ -1,0 +1,3 @@
+[submodule "shippy-service-email"]
+	path = shippy-service-email
+	url = https://github.com/tullo/shippy-service-email
