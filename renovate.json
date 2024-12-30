@@ -1,8 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "config:recommended"
+  ],
   "automerge": true,
   "ignoreTests": true,
-  "postUpdateOptions": ["gomodTidy"],
-  "constraints": {"go": "1.20"}
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "constraints": {
+    "go": "1.20"
+  }
 }
