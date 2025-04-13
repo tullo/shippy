@@ -42,3 +42,12 @@ git log -p --submodule
 git commit -m 'pull submodule changes'
 git push --recurse-submodules=check
 ```
+## trouble shooting
+
+```sh
+rm -rf shippy-service-vessel
+git rm -r --cached shippy-service-vessel
+git commit -m "Remove shippy-service-vessel from the index"
+git submodule add https://github.com/tullo/shippy-service-vessel
+git submodule status
+```
