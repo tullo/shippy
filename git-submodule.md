@@ -21,10 +21,13 @@ git clone --recurse-submodules https://github.com/chaconinc/MainProject
 ## Pulling in Upstream Changes from the Submodule Remote
 cd module-dir && git fetch
 cd main-dir && git diff --submodule
+## one-liner (Git will go into your submodules and fetch and update for you.)
+git submodule update --remote
+
+git submodule status
+
 git config --global diff.submodule log
 git diff
-## one-liner (Git will go into your submodules and fetch and update for you.)
-git submodule update --remote DbConnector
 
 ## specify default branch to point to 'stable'
 git config -f .gitmodules submodule.DbConnector.branch stable
@@ -36,5 +39,6 @@ git log -p --submodule
 
 ## Pushing
 ## Commit in the main project and push it up with the submodule changes
+git commit -m 'pull submodule changes'
 git push --recurse-submodules=check
 ```
